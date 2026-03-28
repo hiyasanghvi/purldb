@@ -530,6 +530,12 @@ class Package(
         null=True,
         help_text=_("A mapping containing a summary and license clarity score for this Package"),
     )
+    popularity_score = models.FloatField(
+        null=True,
+        blank=True,
+        default=0.0,
+        help_text="Computed popularity score based on dependency graph ranking"
+    )
     is_duplicate = models.BooleanField(
         default=False,
         help_text=_("True if this Package is a duplicate of another Package"),

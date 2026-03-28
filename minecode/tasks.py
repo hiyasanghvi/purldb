@@ -10,7 +10,7 @@
 import json
 
 from commoncode.fileutils import delete
-
+from minecode.pipelines.popularity_pipeline import run_popularity_pipeline
 from minecode.indexing import index_package
 from minecode.models import ScannableURI
 
@@ -60,3 +60,9 @@ def process_scan_results(
     # Clean up after indexing has ended
     delete(scan_results_location)
     delete(scan_summary_location)
+def scheduled_popularity_update():
+    """
+    Periodic task: recompute popularity scores for all packages.
+    Registered with rq-scheduler for automatic execution.
+    """
+    run_popularity_pipeline()
