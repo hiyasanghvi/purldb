@@ -6,7 +6,7 @@
 # See https://github.com/aboutcode-org/purldb for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
-
+from django.contrib import admin
 from django.conf import settings
 from django.conf.urls import include
 from django.urls import path
@@ -69,6 +69,11 @@ urlpatterns = [
         index_package_scan,
         name="index_package_scan",
     ),
+]
+urlpatterns = [
+    path("admin/", admin.site.urls),  # 🔥 ADD THIS
+    path("api/", include((api_router.urls, "api"))),
+    path("", RedirectView.as_view(url="api/")),
 ]
 
 
